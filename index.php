@@ -1,12 +1,20 @@
 <!-- Temp passé 20 min -->
+<?php 
+if(isset($_POST)){
 
+$total = 0;
+	foreach ($_POST as $key => $value) {
+	 $total += $value;
+	}	
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="https://kit.fontawesome.com/c2dbfd9242.js" crossorigin="anonymous"></script>
 	<title>Questionnaire</title>
 
@@ -47,7 +55,7 @@
   </div>
 </nav>
     
- 	<form class="w-25 m-auto">
+ 	<form class="w-25 m-auto" method="post" action="#">
   		<div id="carouselExampleIndicators" class="carousel slide" data-interval="false" data-ride="carousel">
 		  	<ol class="carousel-indicators bg-dark">
 		  		<?php 
@@ -82,7 +90,6 @@
 		  		<?php 
 		  		$quest = null;
 		  		$data;
-		  		
 				    for ($i=1; $i < count($lines)-1; $i++) { 
 				        	$data = $lines[$i];	
 
@@ -96,7 +103,7 @@
 									    <div class="form-group">
 										    <label for="Input<?php echo $i; ?>"><?php echo $data[4]; ?></label>
 										    <input type="<?php echo $data[3]; ?>" class="form-control" id="Input<?php echo $i; ?> " <?php if ($data[3] == "radio") {
-										    	$name = "name_".$i."'";
+										    	$name = "name_$i";
 										    	echo "name='$name'";
 										    }
 										    else {
@@ -107,23 +114,25 @@
 										<?php 
 										$i++;
 										$data = $lines[$i];	
-										while ( $data[2] == null && $i < count($lines)-1) { ?>
+										while ( $data[2] == null && $i < count($lines)) { ?>
 											<div class="form-group">
 												<label for="Input<?php echo $i; ?>"><?php echo $data[4]; ?></label>
-											    <input type="<?php echo $data[3]; ?>" class="form-control" id="Input<?php echo $i; ?>"  value="<?php echo $data[5]; ?>" <?php if ($data[3] == "radio") {
+											    <input type="<?php echo $data[3]; ?>" class="form-control" id="Input<?php echo $i; ?>"  value="<?php echo $data[5]; ?>" 
+										<?php if ($data[3] == "radio") {
 										    	echo "name='$name'";
 										    }
 										    else {
 										    	echo "name='name_$i'";
 										    }?>>
 											</div>
-										<?php				
-											$i++;
-											$data = $lines[$i];				    	
+										<?php
+										$i++;
+										if ($i < count($lines)) {
+														$data = $lines[$i];
+														}			    	
 									    } 
 									    $i--;
-									    ?>									    
-
+									    ?>
 									</div>
 								</div>
 							</div>
@@ -152,11 +161,20 @@
 		</div>
 	</form>
 
+<?php
+if (isset($total)) {
+	?>
+<div class="d-flex w-100">
+	<h1 class="display-3 m-auto">Vous avez un score de <?php  echo $total; ?> !</h1>
+</div>
+	<?php
+}
 
+?>
 
 	<script src="js/jquery.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 theme;ico;quest;type;rep;value
-Ecologie;fas fa-leaf;Recyclez-vous les bouteilles en verre ?;radio;oui;0
+Ecologie;fas fa-leaf;Recyclez-vous les bouteilles en verre ?;radio;oui;5
 ;;;radio;non;10
 Ecologie;fas fa-leaf;Vous jettez vos déchets dans :;radio;la nature;25
 ;;;radio;une poubelle;15
