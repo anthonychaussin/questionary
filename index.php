@@ -1,4 +1,4 @@
-<!-- Temp passé 2h -->
+<!-- Temps passé 2h -->
 <?php 
 if(isset($_POST)){
 
